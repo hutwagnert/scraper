@@ -17,12 +17,12 @@
                     <p> {{this.summary}}</p>
                     <a href={{this.link}} target="_blank">{{this.link}}</a>
                     <br><br>
-                    <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
+                    <button type="button" class="btn btn-info saveIt" data-id={{this._id}}>Save Article</button>
                 </div>
             </div>
             {{/each}}
         {{else}}
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-body">
             <h4>Uh Oh. Looks like we don't have any new articles.</h4>
             </div>

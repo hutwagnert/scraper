@@ -4,7 +4,6 @@ $("#scrape").on("click", function() {
         method: "GET",
         url: "/scrape",
     }).done(function(data) {
-        console.log(data)
         window.location = "/"
     })
 });
@@ -16,22 +15,22 @@ $(".navbar-nav li").click(function() {
 });
 
 //Handle Save Article button
-$(".save").on("click", function() {
-    var thisId = $(this).attr("data-id");
+$(".saveIt").on("click", function() {
+    var useID = $(this).attr("data-id");
     $.ajax({
         method: "POST",
-        url: "/articles/save/" + thisId
-    }).done(function(data) {
+        url: "/articles/save/" + useID
+    }).done(function(results) {
         window.location = "/"
     })
 });
 
 //Handle Delete Article button
-$(".delete").on("click", function() {
-    var thisId = $(this).attr("data-id");
+$(".toDelete").on("click", function() {
+    var useID = $(this).attr("data-id");
     $.ajax({
         method: "POST",
-        url: "/articles/delete/" + thisId
+        url: "/articles/delete/" + useID
     }).done(function(data) {
         window.location = "/saved"
     })
@@ -39,37 +38,33 @@ $(".delete").on("click", function() {
 
 //Handle Save Note button
 $(".saveNote").on("click", function() {
-    var thisId = $(this).attr("data-id");
-    if (!$("#noteText" + thisId).val()) {
+    var useID = $(this).attr("data-id");
+    if (!$("#noteText" + useID).val()) {
         alert("please enter a note to save")
     }else {
       $.ajax({
             method: "POST",
-            url: "/notes/save/" + thisId,
+            url: "/notes/save/" + useID,
             data: {
-              text: $("#noteText" + thisId).val()
+              text: $("#noteText" + useID).val()
             }
           }).done(function(data) {
-              // Log the response
-              console.log(data);
-              // Empty the notes section
-              $("#noteText" + thisId).val("");
-              $(".modalNote").modal("hide");
+              $("#noteText" + useID).val("");
+              $(".termNote").modal("hide");
               window.location = "/saved"
           });
     }
 });
 
 //Handle Delete Note button
-$(".deleteNote").on("click", function() {
+$(".toDelNote").on("click", function() {
     var noteId = $(this).attr("data-note-id");
     var articleId = $(this).attr("data-article-id");
     $.ajax({
         method: "DELETE",
         url: "/notes/delete/" + noteId + "/" + articleId
     }).done(function(data) {
-        console.log(data)
-        $(".modalNote").modal("hide");
+        $(".termNote").modal("hide");
         window.location = "/saved"
     })
 });
